@@ -66,6 +66,21 @@ public class SecurityConfigIT {
         Assert.assertNotNull(acessToken);
     }
 
+    @Test
+    public void autenticaComSucessoTestandoCors() {
+    	
+    	UsuarioLoginRequest usuarioLoginRequest= new UsuarioLoginRequest();
+    	usuarioLoginRequest.setNome("usuario");
+    	usuarioLoginRequest.setSenha("password");
+    	
+    	Response response = doLogin(usuarioLoginRequest);
+    	
+    	String acessToken = response.getBody().jsonPath().getString("access_token");
+    	
+    	Assert.assertEquals(OK_HTTP_STATUS_CODE, response.getStatusCode());
+    	Assert.assertNotNull(acessToken);
+    }
+
     private Response doLogin(UsuarioLoginRequest usuarioLoginRequest) {
 
         String clientBasicAuthCredentials =

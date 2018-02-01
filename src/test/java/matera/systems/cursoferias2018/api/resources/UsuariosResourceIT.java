@@ -16,14 +16,14 @@ import java.util.Base64;
 
 public class UsuariosResourceIT {
 
-    private static final String USUARIOS_URL = "http://localhost:8080/usuarios";
+    private static final String USUARIOS_URL = "http://localhost:8080/api/v1/usuarios";
     private static final String CONTENT_TYPE_HEADER = "Content-Type";
     private static final String LOCATION_HEADER = "location";
     private static final int NO_CONTENT_HTTP_STATUS_CODE = 204;
     private static final int CREATED_HTTP_STATUS_CODE = 201;
     private static final int OK_HTTP_STATUS_CODE = 200;
     private static final String UUID_REGEX = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
-    private static final String LOCATION_PATTERN = "/usuarios/" + UUID_REGEX;
+    private static final String LOCATION_PATTERN = "/api/v1/usuarios/" + UUID_REGEX;
 
     private int portNumber = 8080;
 

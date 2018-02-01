@@ -22,7 +22,7 @@ import matera.systems.cursoferias2018.api.domain.response.UsuarioResponse;
 import matera.systems.cursoferias2018.api.services.DisciplinaService;
 
 @RestController
-@RequestMapping(path = "/disciplinas")
+@RequestMapping(path = "/api/v1/disciplinas")
 public class DisciplinasRS {
 
     @Autowired
@@ -72,7 +72,7 @@ public class DisciplinasRS {
 
         final UUID created = service.criar(request);
         return ResponseEntity.status(201)
-                .header("location", "/disciplinas/" + created)
+                .header("location", "/api/v1/disciplinas/" + created)
                 .build();
     }
     @GetMapping(
@@ -82,7 +82,7 @@ public class DisciplinasRS {
     public ResponseEntity<List<UsuarioResponse>> findAlunosPorDisciplinaID(@PathVariable UUID disciplinaID) {
 
         List<UsuarioResponse> usuarios = service.findUsuariosByDisciplinaID(disciplinaID);
-        if (usuarios.size() > 0) {
+        if (!usuarios.isEmpty()) {
             return ResponseEntity.status(200).body(usuarios);
         } else {
             return ResponseEntity.status(404).build();

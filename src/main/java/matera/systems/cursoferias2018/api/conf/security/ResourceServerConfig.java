@@ -18,7 +18,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         auth.inMemoryAuthentication()
             .withUser("usuario")
                 .password("password")
-                .roles("ROLE");
+                .roles("ROLE")
+            .and()
+            .withUser("cursodeferias")
+            	.password("senhadocurso")
+            	.roles("ROLE");
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(path = "/frequencia")
+@RequestMapping(path = "/api/v1/frequencia")
 public class FrequenciaRS {
 
     @Autowired

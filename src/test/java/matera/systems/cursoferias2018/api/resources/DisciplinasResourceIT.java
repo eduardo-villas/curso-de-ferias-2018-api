@@ -18,7 +18,7 @@ import java.util.Base64;
 
 public class DisciplinasResourceIT {
 
-    static final String DISCIPLINAS_URL = "/disciplinas";
+    static final String DISCIPLINAS_URL = "/api/v1/disciplinas";
     static final String ALUNOS = "alunos";
     static final String CONTENT_TYPE_HEADER = "Content-Type";
     static final String LOCATION_HEADER = "location";
@@ -26,7 +26,7 @@ public class DisciplinasResourceIT {
     static final int CREATED_HTTP_STATUS_CODE = 201;
     static final int OK_HTTP_STATUS_CODE = 200;
     static final String UUID_REGEX = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
-    static final String LOCATION_PATTERN = "/disciplinas/" + UUID_REGEX;
+    static final String LOCATION_PATTERN = "/api/v1/disciplinas/" + UUID_REGEX;
 
     @Test
     public void buscarDisciplinaPorId() {

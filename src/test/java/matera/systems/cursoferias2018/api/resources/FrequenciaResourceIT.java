@@ -13,7 +13,7 @@ import matera.systems.cursoferias2018.api.repository.UsuarioRepositoryStub;
 
 public class FrequenciaResourceIT {
 
-    static final String FREQUENCIA_URL = "/frequencia";
+    static final String FREQUENCIA_URL = "/api/v1/frequencia";
     static final String CONTENT_TYPE_HEADER = "Content-Type";
     static final int NO_CONTENT_HTTP_STATUS_CODE = 204;
 

@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
-@RequestMapping(path = "/usuarios")
+@RequestMapping(path = "/api/v1/usuarios")
 public class UsuariosRS {
 
     @Autowired
@@ -26,7 +29,7 @@ public class UsuariosRS {
 
         final UUID createdUser = service.criar(request);
         return ResponseEntity.status(201)
-                .header("location", "/usuarios/" + createdUser)
+                .header("location", "/api/v1/usuarios/" + createdUser)
                 .build();
     }
 
@@ -66,6 +69,18 @@ public class UsuariosRS {
         } else {
             return ResponseEntity.status(404).build();
         }
+    }
+    @GetMapping(
+            value = "/me",
+            produces = { "application/json", "application/xml" }
+    )
+    public ResponseEntity<UsuarioResponse> me(HttpServletRequest request) {
+
+    	Principal principal = request.getUserPrincipal();
+    	
+    	final Optional<UsuarioResponse> usuario = service.findUsuarioByLogin(principal.getName());
+    	
+        return ResponseEntity.ok().body(usuario.get());
     }
 
 }
