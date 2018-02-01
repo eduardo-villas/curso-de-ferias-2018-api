@@ -6,8 +6,8 @@ import java.util.Date;
 
 public class DateRange {
 
-    private static final String DEFAULT_DATE_PATTERN = "DD-MM-YYYY";
-    private static final String BIG_BANG_DATE = "01-01-1970";
+    private static final String DEFAULT_DATE_PATTERN = "YYYYMMDD";
+    private static final String BIG_BANG_DATE = "19700101";
 
     private long start;
     private long end;

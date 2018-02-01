@@ -4,19 +4,19 @@ import java.util.UUID;
 
 public class UsuarioResponse {
 
-    private UUID uuid;
+    private UUID id;
     private String nome;
     private String login;
     private String email;
     private String perfil;
-    private String urlPhoto;
+    private String urlFoto;
 
-    public UUID getUuid() {
-        return uuid;
+    public UUID getId() {
+        return id;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -51,12 +51,12 @@ public class UsuarioResponse {
         this.perfil = perfil;
     }
 
-    public String getUrlPhoto() {
-        return urlPhoto;
+    public String getUrlFoto() {
+        return urlFoto;
     }
 
-    public void setUrlPhoto(String urlPhoto) {
-        this.urlPhoto = urlPhoto;
+    public void setUrlFoto(String urlFoto) {
+        this.urlFoto = urlFoto;
     }
 
 }

@@ -1,23 +1,30 @@
 package matera.systems.cursoferias2018.api.services;
 
-import matera.systems.cursoferias2018.api.domain.entity.DisciplinaEntity;
-import matera.systems.cursoferias2018.api.domain.request.AtualizarDisciplinaRequest;
-import matera.systems.cursoferias2018.api.domain.request.CriarDisciplinaRequest;
-import matera.systems.cursoferias2018.api.domain.response.DisciplinaResponse;
-import matera.systems.cursoferias2018.api.domain.response.UsuarioResponse;
-import matera.systems.cursoferias2018.api.repository.DisciplinaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import matera.systems.cursoferias2018.api.domain.entity.DisciplinaEntity;
+import matera.systems.cursoferias2018.api.domain.entity.UsuarioEntity;
+import matera.systems.cursoferias2018.api.domain.request.AtualizarDisciplinaRequest;
+import matera.systems.cursoferias2018.api.domain.request.CriarDisciplinaRequest;
+import matera.systems.cursoferias2018.api.domain.response.DisciplinaResponse;
+import matera.systems.cursoferias2018.api.domain.response.UsuarioResponse;
+import matera.systems.cursoferias2018.api.repository.DisciplinaRepository;
 
 @Service
 public class DisciplinaService {
 
+	private final Predicate<UsuarioEntity> PROFESSOR_PREDICATE = usuario -> "PROFESSOR".equals(usuario.getPerfil());
+	
     @Autowired
     private DisciplinaRepository repository;
 
@@ -121,12 +128,22 @@ public class DisciplinaService {
         return repository.findUsuariosByDisciplinaID(id);
     }
 
-    private Function<DisciplinaEntity, DisciplinaResponse> toResponse = (entity) -> {
+    private Function<DisciplinaEntity, DisciplinaResponse> toResponse = entity -> {
+    	
         DisciplinaResponse response = new DisciplinaResponse();
         response.setId(entity.getId());
         response.setDescricao(entity.getDescricao());
         response.setSegmento(entity.getSegmento());
-        response.setUsuarios(entity.getUsuarios());
+        
+		List<String> professoresId = 
+        		entity.getUsuarios()
+        			.stream()
+        			.filter(PROFESSOR_PREDICATE)
+        			.map(UsuarioEntity::getUuid)
+        			.map(UUID::toString)
+        			.collect(toList());
+        
+        response.setProfessores(professoresId);
         response.setDataInicio(entity.getDataInicio());
         response.setDataTermino(entity.getDataTermino());
         response.setUrlLogo(entity.getUrlLogo());

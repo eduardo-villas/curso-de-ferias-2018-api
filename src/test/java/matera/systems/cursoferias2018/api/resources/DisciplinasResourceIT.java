@@ -37,7 +37,7 @@ public class DisciplinasResourceIT {
                         .header(getAuthorizationHeader())
                         .header("Accept", "application/json")
                     .get(DISCIPLINAS_URL + "/" + DisciplinasRepositoryStub.DISCIPLINA_2.toString())
-                        .thenReturn();
+                    .thenReturn();
 
         DisciplinaResponse disciplina = response.getBody().as(DisciplinaResponse.class);
         Assert.assertNotNull(disciplina);

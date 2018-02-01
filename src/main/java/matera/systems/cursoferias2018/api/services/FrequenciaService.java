@@ -17,15 +17,15 @@ public class FrequenciaService {
 
     public void incluirPresenca(UUID disicplina, UUID aluno, Date data) {
 
-        repository.incluir(aluno, disicplina, data);
+        repository.incluir(disicplina, aluno, data);
     }
 
     public void removerPresenca(UUID disicplina, UUID aluno, Date data) {
 
-        repository.remover(aluno, disicplina, data);
+        repository.remover(disicplina, aluno, data);
     }
 
-    public List<String> findFrequenciaByAlunoId(UUID alunoId) {
+    public List<String> findFrequenciaByAlunoId(UUID aluno) {
         return new ArrayList<>();
     }
 

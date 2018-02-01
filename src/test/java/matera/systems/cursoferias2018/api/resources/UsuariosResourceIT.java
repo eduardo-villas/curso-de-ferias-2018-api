@@ -85,12 +85,12 @@ public class UsuariosResourceIT {
 
         UsuarioResponse usuario = response.getBody().as(UsuarioResponse.class);
 
-        Assert.assertEquals(UsuarioRepositoryStub.USUARIO_2, usuario.getUuid());
+        Assert.assertEquals(UsuarioRepositoryStub.USUARIO_2, usuario.getId());
         Assert.assertEquals("Usuario Dois", usuario.getNome());
         Assert.assertEquals("usuario_2", usuario.getLogin());
         Assert.assertEquals("usuario_2@domain.com", usuario.getEmail());
         Assert.assertEquals("ADMINISTRADOR", usuario.getPerfil());
-        Assert.assertEquals("http://bucket/usuario/2/perfil.png", usuario.getUrlPhoto());
+        Assert.assertEquals("http://bucket/usuario/2/perfil.png", usuario.getUrlFoto());
         Assert.assertEquals(OK_HTTP_STATUS_CODE, response.getStatusCode());
 
     }

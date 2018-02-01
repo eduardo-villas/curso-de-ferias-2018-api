@@ -1,5 +1,6 @@
 package matera.systems.cursoferias2018.api.domain.entity;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,7 +31,7 @@ public class DisciplinaEntity {
     }
 
     public List<UsuarioEntity> getUsuarios() {
-        return usuarios;
+        return usuarios == null ? Collections.emptyList() : usuarios;
     }
 
     public void setUsuarios(List<UsuarioEntity> usuarios) {
