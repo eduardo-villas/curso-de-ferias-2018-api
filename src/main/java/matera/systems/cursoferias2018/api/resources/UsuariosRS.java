@@ -5,6 +5,7 @@ import matera.systems.cursoferias2018.api.domain.request.CriarUsuarioRequest;
 import matera.systems.cursoferias2018.api.domain.response.UsuarioResponse;
 import matera.systems.cursoferias2018.api.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -80,7 +81,13 @@ public class UsuariosRS {
     	
     	final Optional<UsuarioResponse> usuario = service.findUsuarioByLogin(principal.getName());
     	
-        return ResponseEntity.ok().body(usuario.get());
+    	if(usuario.isPresent()) {
+    		return ResponseEntity.ok().body(usuario.get());
+    	} else {
+    		return ResponseEntity.status(HttpStatus.TEMPORARY_REDIRECT)
+    				.header("Location", "/oauth/token").build();
+    	}
+    	
     }
 
 }
