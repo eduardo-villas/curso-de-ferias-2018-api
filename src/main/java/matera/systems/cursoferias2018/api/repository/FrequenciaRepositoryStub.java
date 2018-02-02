@@ -26,6 +26,7 @@ public class FrequenciaRepositoryStub implements FrequenciaRepository {
             entity.setUsuarioId(aluno);
             frequencias.put(new EntryKey(disciplina, aluno), entity);
         }
+
     }
 
     @Override

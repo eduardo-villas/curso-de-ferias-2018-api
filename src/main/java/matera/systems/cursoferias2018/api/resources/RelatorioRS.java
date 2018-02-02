@@ -29,8 +29,8 @@ public class RelatorioRS {
     @GetMapping(path = "{disciplinaId}")
     public ResponseEntity<RelatorioResponse> frequenciaByDisciplina(
             @PathVariable String disciplinaId,
-            @RequestParam("dataInicio") String dataInicio,
-            @RequestParam("dataFim") String dataFim
+            @RequestParam(name = "dataInicio", required=false) String dataInicio,
+            @RequestParam(name = "dataFim", required=false) String dataFim
     ) throws Exception {
 
 
@@ -54,8 +54,8 @@ public class RelatorioRS {
     public ResponseEntity<RelatorioResponse> frequenciaByDisciplinaAndAluno(
             @PathVariable String disciplinaId,
             @PathVariable String alunoId,
-            @RequestParam("dataInicio") String dataInicio,
-            @RequestParam("dataFim") String dataFim
+            @RequestParam(name = "dataInicio", required = false) String dataInicio,
+            @RequestParam(name = "dataFim", required = false) String dataFim
     ) throws Exception {
 
         final DateRange range;

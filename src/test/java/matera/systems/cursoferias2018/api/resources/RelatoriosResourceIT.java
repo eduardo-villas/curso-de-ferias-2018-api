@@ -22,7 +22,7 @@ public class RelatoriosResourceIT {
     			RestAssured
     				.given()
     				.header(getAuthorizationHeader())
-    				.get("http://localhost:8080/relatorio/" + disciplinaId)
+    				.get("http://localhost:8080/api/v1/relatorio/" + disciplinaId)
     				.thenReturn();
     	
     	Assert.assertEquals(404, response.getStatusCode());
@@ -36,7 +36,7 @@ public class RelatoriosResourceIT {
     			RestAssured
     				.given()
     				.header(getAuthorizationHeader())
-    				.get("http://localhost:8080/relatorio/" + disciplinaId)
+    				.get("http://localhost:8080/api/v1/relatorio/" + disciplinaId)
     				.thenReturn();
 
     	RelatorioResponse relatorio = response.getBody().as(RelatorioResponse.class);

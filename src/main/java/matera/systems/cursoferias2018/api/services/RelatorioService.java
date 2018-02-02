@@ -19,13 +19,14 @@ import matera.systems.cursoferias2018.api.exceptions.DisciplinaNotFound;
 @Service
 public class RelatorioService {
 
-	private static final String DATE_PATTERN = "YYYYMMDD";
+	private static final String DATE_PATTERN = "DD-MM-YYYY";
 	
     @Autowired
     private DisciplinaService disciplinaService;
 
     @Autowired
     private FrequenciaService frequenciaService;
+
 
     public RelatorioResponse frequenciaByDisciplina(UUID disciplinaID, DateRange range) throws Exception {
 
