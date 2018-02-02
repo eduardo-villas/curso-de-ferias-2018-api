@@ -38,8 +38,8 @@ public class DisciplinasRepositoryStub implements DisciplinaRepository {
             entity.setId(DISCIPLINA_1);
             entity.setDataInicio("22/01/2018");
             entity.setDataTermino("03/02/2018");
-            entity.setDescricao("Java REST");
-            entity.setSegmento("Backend");
+            entity.setDescricao("java REST");
+            entity.setSegmento("BACKEND");
             entity.setUsuarios(Arrays.asList(usuarioEntity));
 
             data.put(DISCIPLINA_1, entity);
@@ -51,7 +51,7 @@ public class DisciplinasRepositoryStub implements DisciplinaRepository {
             entity.setDataInicio("22/01/2018");
             entity.setDataTermino("03/02/2018");
             entity.setDescricao("Angular");
-            entity.setSegmento("Front-end");
+            entity.setSegmento("FRONTEND");
             entity.setUsuarios(new ArrayList<>());
  
             data.put(DISCIPLINA_2, entity);
@@ -63,7 +63,7 @@ public class DisciplinasRepositoryStub implements DisciplinaRepository {
             entity.setDataInicio("22/01/2018");
             entity.setDataTermino("03/02/2018");
             entity.setDescricao("Ionic");
-            entity.setSegmento("Mobile");
+            entity.setSegmento("MOBILE");
             entity.setUsuarios(new ArrayList<>());
             
             data.put(DISCIPLINA_3, entity);
