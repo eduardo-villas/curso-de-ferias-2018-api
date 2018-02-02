@@ -29,4 +29,9 @@ public class FrequenciaService {
         return new ArrayList<>();
     }
 
+	public List<String> getPresencas(UUID uuid, UUID id) {
+		
+		return new ArrayList<>();
+	}
+
 }

@@ -1,6 +1,7 @@
 package matera.systems.cursoferias2018.api.repository;
 
 import matera.systems.cursoferias2018.api.domain.entity.DisciplinaEntity;
+import matera.systems.cursoferias2018.api.domain.entity.UsuarioEntity;
 import matera.systems.cursoferias2018.api.domain.response.UsuarioResponse;
 import matera.systems.cursoferias2018.api.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,22 @@ public class DisciplinasRepositoryStub implements DisciplinaRepository {
 
     static {
         {
+        	UsuarioEntity usuarioEntity = new UsuarioEntity();
+            usuarioEntity.setUuid(UsuarioRepositoryStub.USUARIO_1);
+            usuarioEntity.setEmail("usuario_1@domain.com");
+            usuarioEntity.setLogin("usuario_1");
+            usuarioEntity.setNome("Usuario Um");
+            usuarioEntity.setPerfil("USUARIO");
+            usuarioEntity.setSenha("senha");
+            usuarioEntity.setUrlPhoto("http://bucket/usuario/1/perfil.png");
+            
             DisciplinaEntity entity = new DisciplinaEntity();
             entity.setId(DISCIPLINA_1);
             entity.setDataInicio("22/01/2018");
             entity.setDataTermino("03/02/2018");
             entity.setDescricao("Java REST");
             entity.setSegmento("Backend");
+            entity.setUsuarios(Arrays.asList(usuarioEntity));
 
             data.put(DISCIPLINA_1, entity);
         }
@@ -41,6 +52,7 @@ public class DisciplinasRepositoryStub implements DisciplinaRepository {
             entity.setDataTermino("03/02/2018");
             entity.setDescricao("Angular");
             entity.setSegmento("Front-end");
+            entity.setUsuarios(new ArrayList<>());
  
             data.put(DISCIPLINA_2, entity);
         }
@@ -52,6 +64,7 @@ public class DisciplinasRepositoryStub implements DisciplinaRepository {
             entity.setDataTermino("03/02/2018");
             entity.setDescricao("Ionic");
             entity.setSegmento("Mobile");
+            entity.setUsuarios(new ArrayList<>());
             
             data.put(DISCIPLINA_3, entity);
         }
