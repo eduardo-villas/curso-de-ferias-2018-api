@@ -36,8 +36,8 @@ public class DisciplinasRepositoryStub implements DisciplinaRepository {
             
             DisciplinaEntity entity = new DisciplinaEntity();
             entity.setId(DISCIPLINA_1);
-            entity.setDataInicio("22/01/2018");
-            entity.setDataTermino("03/02/2018");
+            entity.setDataInicio("2018-01-22");
+            entity.setDataTermino("2018-02-03");
             entity.setDescricao("java REST");
             entity.setSegmento("BACKEND");
             entity.setUsuarios(Arrays.asList(usuarioEntity));
@@ -48,8 +48,8 @@ public class DisciplinasRepositoryStub implements DisciplinaRepository {
         {
             DisciplinaEntity entity = new DisciplinaEntity();
             entity.setId(DISCIPLINA_2);
-            entity.setDataInicio("22/01/2018");
-            entity.setDataTermino("03/02/2018");
+            entity.setDataInicio("2018-01-22");
+            entity.setDataTermino("2018-02-03");
             entity.setDescricao("Angular");
             entity.setSegmento("FRONTEND");
             entity.setUsuarios(new ArrayList<>());
@@ -60,8 +60,8 @@ public class DisciplinasRepositoryStub implements DisciplinaRepository {
         {
             DisciplinaEntity entity = new DisciplinaEntity();
             entity.setId(DISCIPLINA_3);
-            entity.setDataInicio("22/01/2018");
-            entity.setDataTermino("03/02/2018");
+            entity.setDataInicio("2018-01-22");
+            entity.setDataTermino("2018-02-03");
             entity.setDescricao("Ionic");
             entity.setSegmento("MOBILE");
             entity.setUsuarios(new ArrayList<>());
@@ -73,6 +73,7 @@ public class DisciplinasRepositoryStub implements DisciplinaRepository {
     @Override
     public UUID criar(DisciplinaEntity disciplina) {
         UUID uuid = UUID.randomUUID();
+        disciplina.setId(uuid);
         data.put(uuid, disciplina);
         return uuid;
     }
