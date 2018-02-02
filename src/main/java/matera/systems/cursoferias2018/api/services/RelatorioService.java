@@ -1,9 +1,8 @@
 package matera.systems.cursoferias2018.api.services;
 
 import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ import matera.systems.cursoferias2018.api.exceptions.DisciplinaNotFound;
 @Service
 public class RelatorioService {
 
-	private static final String DATE_PATTERN = "DD-MM-YYYY";
+	private static final String DATE_PATTERN = "YYYY-MM-DD";
 	
     @Autowired
     private DisciplinaService disciplinaService;
@@ -32,6 +31,7 @@ public class RelatorioService {
 
         RelatorioResponse relatorio = new RelatorioResponse();
 
+        List<RelatorioResponseEntry> entries = new ArrayList<>();
         for (UsuarioResponse aluno : disciplinaService.findUsuariosByDisciplinaID(disciplinaID)) {
 
             final Optional<DisciplinaResponse> disciplina = disciplinaService.findByID(disciplinaID);
@@ -41,21 +41,23 @@ public class RelatorioService {
                 String dataFim = disciplina.get().getDataTermino();
 
                 SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
-                int totalAulas = Integer.parseInt(sdf.format(dataFim)) - Integer.parseInt(sdf.format(dataInicio));
+                long diff = sdf.parse(dataFim).getTime() - sdf.parse(dataInicio).getTime();
 
                 List<String> presencas = frequenciaService.findFrequenciaByAlunoId(aluno.getId());
                 RelatorioResponseEntry entry = new RelatorioResponseEntry();
 
                 entry.setUsuario(aluno);
                 entry.setPresenca(presencas);
-                entry.setFrequencia(totalAulas - presencas.size());
+                entry.setFrequencia((int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) - presencas.size());
+
+                entries.add(entry);
 
             } else {
                 throw new DisciplinaNotFound();
             }
 
         }
-
+        relatorio.setEntries(entries);
         return relatorio;
     }
 
@@ -66,6 +68,7 @@ public class RelatorioService {
         Optional<UsuarioResponse> aluno =
                 disciplinaService.findUsuariosByDisciplinaID(disciplinaID).stream().filter(_aluno -> _aluno.getId().equals(alunoID)).findFirst();
 
+        List<RelatorioResponseEntry> entries = new ArrayList<>();
         if (aluno.isPresent()) {
 
             final Optional<DisciplinaResponse> disciplina = disciplinaService.findByID(disciplinaID);
@@ -85,6 +88,8 @@ public class RelatorioService {
                 entry.setPresenca(presencas);
                 entry.setFrequencia(totalAulas - presencas.size());
 
+                entries.add(entry);
+
             } else {
                 throw new DisciplinaNotFound();
             }
@@ -93,6 +98,7 @@ public class RelatorioService {
             throw new AlunoNotFound();
         }
 
+        relatorio.setEntries(entries);
         return relatorio;
     }
 

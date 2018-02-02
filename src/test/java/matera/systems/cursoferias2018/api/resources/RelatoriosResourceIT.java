@@ -42,7 +42,7 @@ public class RelatoriosResourceIT {
     	RelatorioResponse relatorio = response.getBody().as(RelatorioResponse.class);
     	
     	Assert.assertEquals(200, response.getStatusCode());
-    	Assert.assertEquals(1, relatorio.getEntries().size());
+    	Assert.assertEquals(3, relatorio.getEntries().size());
     	
     	RelatorioResponseEntry relatorioEntry = relatorio.getEntries().get(0);
     	Assert.assertNotNull(relatorioEntry.getUsuario());
