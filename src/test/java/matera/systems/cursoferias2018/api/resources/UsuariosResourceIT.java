@@ -6,12 +6,12 @@ import matera.systems.cursoferias2018.api.domain.response.UsuarioResponse;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import matera.systems.cursoferias2018.api.repository.UsuarioRepositoryStub;
+
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.UUID;
 
 public class UsuariosResourceIT {
 
@@ -116,6 +116,49 @@ public class UsuariosResourceIT {
                     .thenReturn();
 
         Assert.assertEquals(NO_CONTENT_HTTP_STATUS_CODE, response.getStatusCode());
+    }
+    
+    @Test
+    public void criarUsuarioSmokeTest() {
+
+        CriarUsuarioRequest createRequest = new CriarUsuarioRequest();
+        createRequest.setNome("John Doe");
+        createRequest.setLogin("john.doe");
+        createRequest.setEmail("john.doe@email.com");
+        createRequest.setPerfil("ADMINISTRADOR");
+        createRequest.setUrlPhoto("http://pictures.pic/johndoe");
+
+        Response response = RestAssured
+                .given()
+                    .body(createRequest)
+                    .header(CONTENT_TYPE_HEADER, "application/json")
+                .when()
+                    .post(USUARIOS_URL)
+                .then()
+                	.statusCode(CREATED_HTTP_STATUS_CODE)
+               	.and()
+               		.extract().response();
+
+        Assert.assertEquals(CREATED_HTTP_STATUS_CODE, response.getStatusCode());
+
+        String location = response.getHeader(LOCATION_HEADER);
+        Assert.assertTrue(location.matches(LOCATION_PATTERN));
+        
+        Response responseGet =
+                RestAssured
+                    .given()
+                        .header("Accept", "application/json")
+                        .get(location)
+                    .thenReturn();
+
+        UsuarioResponse usuario = responseGet.getBody().as(UsuarioResponse.class);
+
+        Assert.assertEquals(createRequest.getNome(), usuario.getNome());
+        Assert.assertEquals(createRequest.getLogin(), usuario.getLogin());
+        Assert.assertEquals(createRequest.getEmail(), usuario.getEmail());
+        Assert.assertEquals(createRequest.getPerfil(), usuario.getPerfil());
+        Assert.assertEquals(createRequest.getUrlPhoto(), usuario.getUrlPhoto());
+        Assert.assertEquals(OK_HTTP_STATUS_CODE, responseGet.getStatusCode());
     }
 
 }
